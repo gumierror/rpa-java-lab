@@ -1,29 +1,37 @@
 package br.com.nexum.exemplo_pedido.application.service;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class BrowserService {
 
-    public void openChrome() {
+    private WebDriver driver;
+
+    public void abrirNavegador() {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
-            ProcessBuilder processBuilder;
+            log.info("Configurando ChromeDriver...");
+            WebDriverManager.chromedriver().setup(); // Baixa e configura automaticamente
 
-            if (os.contains("win")) {
-                processBuilder = new ProcessBuilder("cmd", "/c", "start", "chrome", "https://www.youtube.com");
-            } else if (os.contains("mac")) {
-                processBuilder = new ProcessBuilder("open", "-a", "Google Chrome");
-            } else {
-                processBuilder = new ProcessBuilder("google-chrome");
-            }
+            driver = new ChromeDriver();
+            driver.get("https://www.youtube.com"); // Altere para a URL desejada
 
-            processBuilder.start();
-            log.info("Google Chrome opened successfully");
+            log.info("Navegador aberto com sucesso.");
         } catch (Exception e) {
-            log.error("Failed to open Google Chrome: {}", e.getMessage());
+            log.error("Erro ao iniciar navegador: ", e);
+        }
+    }
+
+    @PreDestroy
+    public void fecharNavegador() {
+        if (driver != null) {
+            log.info("Fechando navegador...");
+            driver.quit();
         }
     }
 }

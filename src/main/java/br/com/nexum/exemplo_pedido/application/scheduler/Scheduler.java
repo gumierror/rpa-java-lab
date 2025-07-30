@@ -2,24 +2,25 @@ package br.com.nexum.exemplo_pedido.application.scheduler;
 
 import br.com.nexum.exemplo_pedido.application.service.BrowserService;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
+@EnableScheduling
+@Slf4j
+@RequiredArgsConstructor
 public class Scheduler {
 
-    private final BrowserService browserService = new BrowserService();
+    private final BrowserService browserService;
 
     @PostConstruct
-    public void init() {
-        log.info("Scheduler initialized successfully.");
+    private void schedullerRobot() {
+        log.info("Iniciando tarefa agendada...");
 
-        log.info("Opening Google Chrome...");
-        browserService.openChrome();
-        log.info("Google Chrome should now be open.");
-
-        // Here you can add any scheduled tasks or initializations needed for your application.
+        browserService.abrirNavegador(); // agora com Selenium
+        log.info("Tarefa concluída.");
     }
-
 }
