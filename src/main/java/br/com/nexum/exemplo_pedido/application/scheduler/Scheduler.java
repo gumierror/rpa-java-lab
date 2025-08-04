@@ -30,18 +30,23 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(fixedDelay = 30000, initialDelay = 5000) // Executa 5 segundos após inicialização, depois a cada 30 segundos
+    @Scheduled(initialDelay = 5000, fixedDelay = Long.MAX_VALUE) // Executa 5 segundos após inicialização, depois não executa mais
     public void executarAutomacaoYoutube() {
         log.info("=== Iniciando automação YouTube ===");
 
         try {
-            // Executar todas as ações do YouTube: abrir site + buscar + clicar primeiro vídeo
             youtubeSearchUseCase.executarBuscaEClicarPrimeiroVideo("movements daylily");
 
             log.info("=== Automação YouTube concluída com sucesso ===");
 
         } catch (Exception e) {
             log.error("Erro durante automação YouTube: ", e);
+        }
+        try {
+            browserService.fecharNavegador();
+            log.info("=== Navegador fechado com sucesso ===");
+        } catch (Exception e) {
+            log.error("Erro ao fechar navegador: ", e);
         }
     }
 }
