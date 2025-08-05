@@ -82,39 +82,45 @@ public class TxtParaExcelUseCase {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet("Informações do Vídeo");
 
-            // Criar cabeçalho
-            Row headerRow = sheet.createRow(0);
-            Cell headerCell1 = headerRow.createCell(0);
-            headerCell1.setCellValue("Atributo");
-            Cell headerCell2 = headerRow.createCell(1);
-            headerCell2.setCellValue("Valor");
-
-            // Estilizar cabeçalho
-            CellStyle headerStyle = workbook.createCellStyle();
-            Font headerFont = workbook.createFont();
-            headerFont.setBold(true);
-            headerStyle.setFont(headerFont);
-            headerCell1.setCellStyle(headerStyle);
-            headerCell2.setCellStyle(headerStyle);
-
-            // Processar conteúdo do TXT
+            // Processar conteúdo do TXT para extrair atributos e valores
             String[] linhas = conteudoTxt.split("\n");
-            int rowNum = 1;
+            java.util.List<String> atributos = new java.util.ArrayList<>();
+            java.util.List<String> valores = new java.util.ArrayList<>();
 
             for (String linha : linhas) {
                 if (linha.contains(":") && !linha.startsWith("===") && !linha.trim().isEmpty()) {
                     String[] partes = linha.split(":", 2);
                     if (partes.length == 2) {
-                        Row row = sheet.createRow(rowNum++);
-                        row.createCell(0).setCellValue(partes[0].trim());
-                        row.createCell(1).setCellValue(partes[1].trim());
+                        atributos.add(partes[0].trim());
+                        valores.add(partes[1].trim());
                     }
                 }
             }
 
+            // Criar linha dos cabeçalhos (atributos)
+            Row headerRow = sheet.createRow(0);
+            CellStyle headerStyle = workbook.createCellStyle();
+            Font headerFont = workbook.createFont();
+            headerFont.setBold(true);
+            headerStyle.setFont(headerFont);
+
+            for (int i = 0; i < atributos.size(); i++) {
+                Cell headerCell = headerRow.createCell(i);
+                headerCell.setCellValue(atributos.get(i));
+                headerCell.setCellStyle(headerStyle);
+            }
+
+            // Criar linha dos valores
+            Row valueRow = sheet.createRow(1);
+            for (int i = 0; i < valores.size(); i++) {
+                Cell valueCell = valueRow.createCell(i);
+                valueCell.setCellValue(valores.get(i));
+            }
+
             // Ajustar largura das colunas
-            sheet.autoSizeColumn(0);
-            sheet.autoSizeColumn(1);
+            for (int i = 0; i < atributos.size(); i++) {
+                sheet.autoSizeColumn(i);
+            }
 
             // Salvar arquivo
             try (FileOutputStream fileOut = new FileOutputStream(nomeArquivoExcel)) {
