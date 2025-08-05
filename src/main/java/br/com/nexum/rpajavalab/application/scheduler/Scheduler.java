@@ -1,4 +1,4 @@
-package br.com.nexum.RpaJavaLab.application.scheduler;
+package br.com.nexum.rpajavalab.application.scheduler;
 
 import br.com.nexum.RpaJavaLab.application.service.BrowserService;
 import br.com.nexum.RpaJavaLab.application.usecase.YoutubeSearchUseCase;

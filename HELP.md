@@ -1,9 +1,4 @@
 # Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'br.com.nexum.exemplo-pedido' is invalid and this project uses 'br.com.nexum.RpaJavaLab' instead.
-
-# Getting Started
 
 ### Reference Documentation
 For further reference, please consider the following sections:
