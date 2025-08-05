@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'br.com.nexum.exemplo-pedido' is invalid and this project uses 'br.com.nexum.exemplo_pedido' instead.
+* The original package name 'br.com.nexum.exemplo-pedido' is invalid and this project uses 'br.com.nexum.RpaJavaLab' instead.
 
 # Getting Started
 
