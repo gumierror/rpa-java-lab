@@ -10,7 +10,10 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
         </processorPath>
+<<<<<<< HEAD
         <module name="exemplo-pedido" />
+=======
+>>>>>>> 8df3d846bf443fb2a8217fc27402ebc6c29750bd
         <module name="RpaJavaLab" />
       </profile>
     </annotationProcessing>
@@ -18,7 +21,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="RpaJavaLab" options="-parameters" />
+<<<<<<< HEAD
       <module name="exemplo-pedido" options="-parameters" />
+=======
+>>>>>>> 8df3d846bf443fb2a8217fc27402ebc6c29750bd
     </option>
   </component>
 </project>

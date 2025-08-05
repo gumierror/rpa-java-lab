@@ -9,7 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.nexum</groupId>
+<<<<<<< HEAD
 	<artifactId>rpajavalab</artifactId>
+=======
+	<artifactId>RpaJavaLab</artifactId>
+>>>>>>> 8df3d846bf443fb2a8217fc27402ebc6c29750bd
 	<version>1.0.0</version>
 	<name>rpajavalab</name>
 	<description>Demo project for Spring Boot</description>
