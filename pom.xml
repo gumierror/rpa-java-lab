@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.nexum</groupId>
-	<artifactId>exemplo-pedido</artifactId>
+	<artifactId>RpaJavaLab</artifactId>
 	<version>1.0.0</version>
 	<name>exemplo-pedido</name>
 	<description>Demo project for Spring Boot</description>
