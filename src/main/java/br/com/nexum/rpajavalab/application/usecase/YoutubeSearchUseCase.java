@@ -1,6 +1,6 @@
-package br.com.nexum.RpaJavaLab.application.usecase;
+package br.com.nexum.rpajavalab.application.usecase;
 
-import br.com.nexum.RpaJavaLab.application.service.BrowserService;
+import br.com.nexum.rpajavalab.application.service.BrowserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.TimeoutException;
 import org.springframework.stereotype.Component;
-import br.com.nexum.RpaJavaLab.domain.models.VideoInfo;
+import br.com.nexum.rpajavalab.domain.models.VideoInfo;
 
 import java.io.FileWriter;
 import java.io.IOException;

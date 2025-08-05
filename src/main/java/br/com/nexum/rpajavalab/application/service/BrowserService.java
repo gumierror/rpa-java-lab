@@ -1,4 +1,4 @@
-package br.com.nexum.RpaJavaLab.application.service;
+package br.com.nexum.rpajavalab.application.service;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.annotation.PreDestroy;

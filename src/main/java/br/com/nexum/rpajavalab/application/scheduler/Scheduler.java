@@ -1,7 +1,8 @@
 package br.com.nexum.rpajavalab.application.scheduler;
 
-import br.com.nexum.RpaJavaLab.application.service.BrowserService;
-import br.com.nexum.RpaJavaLab.application.usecase.YoutubeSearchUseCase;
+import br.com.nexum.rpajavalab.application.service.BrowserService;
+import br.com.nexum.rpajavalab.application.usecase.TxtParaExcelUseCase;
+import br.com.nexum.rpajavalab.application.usecase.YoutubeSearchUseCase;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ public class Scheduler {
 
     private final BrowserService browserService;
     private final YoutubeSearchUseCase youtubeSearchUseCase;
+    private final TxtParaExcelUseCase txtParaExcelUseCase;
 
     @PostConstruct
     public void inicializarNavegador() {
@@ -30,18 +32,28 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(initialDelay = 5000, fixedDelay = Long.MAX_VALUE) // Executa 5 segundos após inicialização, depois não executa mais
+    @Scheduled(initialDelay = 5000, fixedDelay = Long.MAX_VALUE)
     public void executarAutomacaoYoutube() {
         log.info("=== Iniciando automação YouTube ===");
 
         try {
             youtubeSearchUseCase.executarBuscaEClicarPrimeiroVideo("movements daylily");
-
             log.info("=== Automação YouTube concluída com sucesso ===");
+
+            // Executar conversão para Excel após a automação
+            log.info("=== Iniciando conversão TXT para Excel ===");
+            String arquivoExcel = txtParaExcelUseCase.converterUltimoTxtParaExcel();
+
+            if (arquivoExcel != null) {
+                log.info("=== Conversão para Excel concluída: {} ===", arquivoExcel);
+            } else {
+                log.error("=== Falha na conversão para Excel ===");
+            }
 
         } catch (Exception e) {
             log.error("Erro durante automação YouTube: ", e);
         }
+
         try {
             browserService.fecharNavegador();
             log.info("=== Navegador fechado com sucesso ===");
