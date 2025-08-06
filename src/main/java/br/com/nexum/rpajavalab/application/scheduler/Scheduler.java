@@ -1,6 +1,7 @@
 package br.com.nexum.rpajavalab.application.scheduler;
 
 import br.com.nexum.rpajavalab.application.service.BrowserService;
+import br.com.nexum.rpajavalab.application.usecase.EnviarPorEmailUseCase;
 import br.com.nexum.rpajavalab.application.usecase.TxtParaExcelUseCase;
 import br.com.nexum.rpajavalab.application.usecase.YoutubeSearchUseCase;
 import jakarta.annotation.PostConstruct;
@@ -19,6 +20,7 @@ public class Scheduler {
     private final BrowserService browserService;
     private final YoutubeSearchUseCase youtubeSearchUseCase;
     private final TxtParaExcelUseCase txtParaExcelUseCase;
+    private final EnviarPorEmailUseCase enviarPorEmailUseCase;
 
     @PostConstruct
     public void inicializarNavegador() {
@@ -49,6 +51,9 @@ public class Scheduler {
             } else {
                 log.error("=== Falha na conversão para Excel ===");
             }
+
+            enviarPorEmailUseCase.enviarUltimaPlanilhaPorEmail("gui.nobrega@hotmail.com");
+            log.info("=== Email enviado com sucesso ===");
 
         } catch (Exception e) {
             log.error("Erro durante automação YouTube: ", e);
