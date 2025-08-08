@@ -8,7 +8,7 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>br.com.nexum</groupId>
+    <groupId>com.nexum</groupId>
     <artifactId>rpajavalab</artifactId>
     <version>1.0.0</version>
     <name>rpajavalab</name>

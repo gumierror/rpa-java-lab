@@ -1,7 +1,0 @@
-br\com\nexum\rpajavalab\application\scheduler\Scheduler.class
-br\com\nexum\rpajavalab\application\service\BrowserService.class
-br\com\nexum\rpajavalab\application\usecase\EnviarPorEmailUseCase.class
-br\com\nexum\rpajavalab\application\usecase\YoutubeSearchUseCase.class
-br\com\nexum\rpajavalab\application\usecase\TxtParaExcelUseCase.class
-br\com\nexum\rpajavalab\RpaJavaLab.class
-br\com\nexum\rpajavalab\domain\models\VideoInfo.class
