@@ -1,6 +1,6 @@
 package com.nexum.rpajavalab.infrastructure.adapter.out.selenium;
 
-import com.nexum.rpajavalab.domain.port.out.BrowserPort;
+import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import java.time.Duration;
 
 @Slf4j
 @Service
-public class BrowserService implements BrowserPort {
+public class BrowserAdapter implements BrowserPort {
 
     private WebDriver driver;
     private WebDriverWait wait;

@@ -1,7 +1,7 @@
-package com.nexum.rpajavalab.application.usecase;
+package com.nexum.rpajavalab.application.usecases;
 
-import com.nexum.rpajavalab.domain.port.in.YoutubeSearchUseCase;
-import com.nexum.rpajavalab.domain.port.out.BrowserPort;
+import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchUsePort;
+import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
 import com.nexum.rpajavalab.domain.model.VideoInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class YoutubeSearchUseCaseImpl implements YoutubeSearchUseCase {
+public class YoutubeSearchUseCase implements YoutubeSearchUsePort {
 
     private final BrowserPort browserPort;
 

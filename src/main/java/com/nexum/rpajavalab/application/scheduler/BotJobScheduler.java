@@ -1,9 +1,9 @@
 package com.nexum.rpajavalab.application.scheduler;
 
-import com.nexum.rpajavalab.domain.port.out.BrowserPort;
-import com.nexum.rpajavalab.domain.port.in.YoutubeSearchUseCase;
-import com.nexum.rpajavalab.domain.port.in.TxtParaExcelUseCase;
-import com.nexum.rpajavalab.domain.port.in.EnviarPorEmailUseCase;
+import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
+import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchUsePort;
+import com.nexum.rpajavalab.domain.ports.in.TxtParaExcelUsePort;
+import com.nexum.rpajavalab.domain.ports.in.EnviarPorEmailPort;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +18,9 @@ import org.springframework.stereotype.Component;
 public class BotJobScheduler {
 
     private final BrowserPort browserPort;
-    private final YoutubeSearchUseCase youtubeSearchUseCase;
-    private final TxtParaExcelUseCase txtParaExcelUseCase;
-    private final EnviarPorEmailUseCase enviarPorEmailUseCase;
+    private final YoutubeSearchUsePort youtubeSearchUsePort;
+    private final TxtParaExcelUsePort txtParaExcelUsePort;
+    private final EnviarPorEmailPort enviarPorEmailPort;
 
     @PostConstruct
     public void inicializarNavegador() {
@@ -39,12 +39,12 @@ public class BotJobScheduler {
         log.info("=== Iniciando automação YouTube ===");
 
         try {
-            youtubeSearchUseCase.executarBuscaEClicarPrimeiroVideo("movements daylily");
+            youtubeSearchUsePort.executarBuscaEClicarPrimeiroVideo("movements daylily");
             log.info("=== Automação YouTube concluída com sucesso ===");
 
             // Executar conversão para Excel após a automação
             log.info("=== Iniciando conversão TXT para Excel ===");
-            String arquivoExcel = txtParaExcelUseCase.converterUltimoTxtParaExcel();
+            String arquivoExcel = txtParaExcelUsePort.converterUltimoTxtParaExcel();
 
             if (arquivoExcel != null) {
                 log.info("=== Conversão para Excel concluída: {} ===", arquivoExcel);
@@ -52,7 +52,7 @@ public class BotJobScheduler {
                 log.error("=== Falha na conversão para Excel ===");
             }
 
-            enviarPorEmailUseCase.enviarUltimaPlanilhaPorEmail("gui.nobrega@hotmail.com");
+            enviarPorEmailPort.enviarUltimaPlanilhaPorEmail("gui.nobrega@hotmail.com");
             log.info("=== Email enviado com sucesso ===");
 
         } catch (Exception e) {

@@ -1,6 +1,6 @@
-package com.nexum.rpajavalab.application.usecase;
+package com.nexum.rpajavalab.application.usecases;
 
-import com.nexum.rpajavalab.domain.port.in.TxtParaExcelUseCase;
+import com.nexum.rpajavalab.domain.ports.in.TxtParaExcelUsePort;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class TxtParaExcelUseCaseImpl implements TxtParaExcelUseCase {
+public class TxtParaExcelUseCase implements TxtParaExcelUsePort {
 
     @Override
     public String converterUltimoTxtParaExcel() {

@@ -1,6 +1,6 @@
-package com.nexum.rpajavalab.application.usecase;
+package com.nexum.rpajavalab.application.usecases;
 
-import com.nexum.rpajavalab.domain.port.in.EnviarPorEmailUseCase;
+import com.nexum.rpajavalab.domain.ports.in.EnviarPorEmailPort;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,14 +14,14 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class EnviarPorEmailUseCaseImpl implements EnviarPorEmailUseCase {
+public class EnviarPorEmailUseCase implements EnviarPorEmailPort {
 
     private final JavaMailSender mailSender;
 
     @Value("${spring.mail.username}")
     private String emailRemetente;
 
-    public EnviarPorEmailUseCaseImpl(JavaMailSender mailSender) {
+    public EnviarPorEmailUseCase(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
