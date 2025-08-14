@@ -1,4 +1,4 @@
-package com.nexum.rpajavalab.application.scheduler;
+package com.nexum.rpajavalab.infrastructure.adapters.in.scheduler;
 
 import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
 import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchUsePort;

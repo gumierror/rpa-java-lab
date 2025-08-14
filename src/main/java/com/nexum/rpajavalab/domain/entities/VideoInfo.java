@@ -1,4 +1,4 @@
-package com.nexum.rpajavalab.domain.model;
+package com.nexum.rpajavalab.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

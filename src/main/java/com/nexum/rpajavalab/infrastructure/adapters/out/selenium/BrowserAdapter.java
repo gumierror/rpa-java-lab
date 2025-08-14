@@ -1,4 +1,4 @@
-package com.nexum.rpajavalab.infrastructure.adapter.out.selenium;
+package com.nexum.rpajavalab.infrastructure.adapters.out.selenium;
 
 import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
 import io.github.bonigarcia.wdm.WebDriverManager;

@@ -2,7 +2,7 @@ package com.nexum.rpajavalab.application.usecases;
 
 import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchUsePort;
 import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
-import com.nexum.rpajavalab.domain.model.VideoInfo;
+import com.nexum.rpajavalab.domain.entities.VideoInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
