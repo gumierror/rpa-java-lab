@@ -1,6 +1,9 @@
 package com.nexum.rpajavalab.application.usecases;
 
+import com.nexum.rpajavalab.domain.models.VideoInfo;
 import com.nexum.rpajavalab.domain.ports.in.TxtParaExcelUsePort;
+import com.nexum.rpajavalab.domain.ports.out.VideoInfoRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,7 +17,10 @@ import java.util.Optional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class TxtParaExcelUseCase implements TxtParaExcelUsePort {
+
+    private final VideoInfoRepositoryPort videoInfoRepositoryPort;
 
     @Override
     public String converterUltimoTxtParaExcel() {
@@ -30,6 +36,18 @@ public class TxtParaExcelUseCase implements TxtParaExcelUsePort {
 
             String conteudoTxt = lerArquivoTxt(ultimoArquivoTxt.get());
             String nomeArquivoExcel = gerarArquivoExcel(conteudoTxt);
+            
+            // Extrair dados do TXT e salvar no banco de dados
+            VideoInfo videoInfo = extrairVideoInfoDoTxt(conteudoTxt);
+            if (videoInfo != null && nomeArquivoExcel != null) {
+                try {
+                    videoInfoRepositoryPort.salvar(videoInfo, nomeArquivoExcel);
+                    log.info("Dados salvos no banco de dados com sucesso");
+                } catch (Exception e) {
+                    log.error("Erro ao salvar dados no banco de dados: ", e);
+                    // Não interrompe o fluxo, apenas loga o erro
+                }
+            }
 
             log.info("Conversão concluída com sucesso: {}", nomeArquivoExcel);
             return nomeArquivoExcel;
@@ -128,5 +146,57 @@ public class TxtParaExcelUseCase implements TxtParaExcelUsePort {
         }
 
         return nomeArquivoExcel;
+    }
+    
+    /**
+     * Extrai as informações do vídeo do conteúdo do arquivo TXT
+     */
+    private VideoInfo extrairVideoInfoDoTxt(String conteudoTxt) {
+        try {
+            String[] linhas = conteudoTxt.split("\n");
+            String nomeVideo = "";
+            String nomeCanal = "";
+            String visualizacoes = "";
+            String dataLancamento = "";
+            
+            for (String linha : linhas) {
+                if (linha.contains(":") && !linha.startsWith("===") && !linha.trim().isEmpty()) {
+                    String[] partes = linha.split(":", 2);
+                    if (partes.length == 2) {
+                        String chave = partes[0].trim().toLowerCase();
+                        String valor = partes[1].trim();
+                        
+                        switch (chave) {
+                            case "nome do vídeo":
+                                nomeVideo = valor;
+                                break;
+                            case "nome do canal":
+                                nomeCanal = valor;
+                                break;
+                            case "visualizações":
+                                visualizacoes = valor;
+                                break;
+                            case "data de lançamento":
+                                dataLancamento = valor;
+                                break;
+                        }
+                    }
+                }
+            }
+            
+            // Verificar se todos os dados essenciais foram encontrados
+            if (!nomeVideo.isEmpty() && !nomeCanal.isEmpty()) {
+                log.info("VideoInfo extraído: Vídeo={}, Canal={}, Visualizações={}, Data={}",
+                        nomeVideo, nomeCanal, visualizacoes, dataLancamento);
+                return new VideoInfo(nomeVideo, nomeCanal, visualizacoes, dataLancamento);
+            } else {
+                log.warn("Dados insuficientes para criar VideoInfo. Vídeo: '{}', Canal: '{}'", nomeVideo, nomeCanal);
+                return null;
+            }
+            
+        } catch (Exception e) {
+            log.error("Erro ao extrair VideoInfo do TXT: ", e);
+            return null;
+        }
     }
 }
