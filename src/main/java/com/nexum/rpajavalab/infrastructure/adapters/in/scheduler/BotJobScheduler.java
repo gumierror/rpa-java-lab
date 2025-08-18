@@ -1,7 +1,7 @@
 package com.nexum.rpajavalab.infrastructure.adapters.in.scheduler;
 
 import com.nexum.rpajavalab.domain.ports.out.BrowserPort;
-import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchUsePort;
+import com.nexum.rpajavalab.domain.ports.in.YoutubeSearchPort;
 import com.nexum.rpajavalab.domain.ports.in.TxtParaExcelUsePort;
 import com.nexum.rpajavalab.domain.ports.in.EnviarPorEmailPort;
 import jakarta.annotation.PostConstruct;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class BotJobScheduler {
 
     private final BrowserPort browserPort;
-    private final YoutubeSearchUsePort youtubeSearchUsePort;
+    private final YoutubeSearchPort youtubeSearchPort;
     private final TxtParaExcelUsePort txtParaExcelUsePort;
     private final EnviarPorEmailPort enviarPorEmailPort;
 
@@ -39,7 +39,7 @@ public class BotJobScheduler {
         log.info("=== Iniciando automação YouTube ===");
 
         try {
-            youtubeSearchUsePort.executarBuscaEClicarPrimeiroVideo("movements daylily");
+            youtubeSearchPort.executarBuscaEClicarPrimeiroVideo("movements daylily");
             log.info("=== Automação YouTube concluída com sucesso ===");
 
             // Executar conversão para Excel após a automação
